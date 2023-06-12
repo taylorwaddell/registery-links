@@ -1,7 +1,9 @@
+"use client";
+
 import ExternalLink from "../icons/ExternalLink";
 
 interface Props {
-  link: string;
+  link?: string;
   title: string;
   summary: string;
 }
@@ -9,7 +11,11 @@ interface Props {
 export default function LinkCardListItem({ title, link, summary }: Props) {
   return (
     <li className="p-2">
-      <a href={link} className="flex font-semibold hover:underline">
+      <a
+        href={link}
+        className="flex font-semibold hover:underline"
+        target="_blank"
+      >
         {title}
         <ExternalLink className={"ml-1"} />
       </a>
