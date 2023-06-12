@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
+import Link from "next/link";
+
 interface ModalProps {
   isOpen: boolean;
   title: string;
@@ -59,22 +61,22 @@ const Modal: React.FC<ModalProps> = ({
             </div>
           </div>
           <div className="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <a
+            <Link
               href={googleLink}
               target="_blank"
               onClick={close}
               className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 dark:text-zinc-900 text-zinc-200 hover:text-zinc-200 bg-zinc-700 dark:bg-zinc-200 hover:bg-blue-700 sm:ml-3 sm:w-auto sm:text-sm"
             >
               {confirmText}
-            </a>
-            <a
+            </Link>
+            <Link
               href={appleLink}
               target="_blank"
               onClick={close}
               className="mt-3 w-full inline-flex justify-center rounded-md border shadow-sm px-4 py-2 dark:text-zinc-900 text-zinc-200 hover:text-zinc-200 bg-zinc-700 dark:bg-zinc-200 hover:bg-zinc-800 sm:mt-0 sm:w-auto sm:text-sm"
             >
               {cancelText}
-            </a>
+            </Link>
           </div>
         </div>
       </div>
