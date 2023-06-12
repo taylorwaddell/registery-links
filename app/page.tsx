@@ -14,7 +14,7 @@ interface LinkCards {
 }
 
 export default function Home() {
-  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   function closeModal() {
     setModalIsOpen(false);
   }
