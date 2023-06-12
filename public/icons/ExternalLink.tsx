@@ -10,7 +10,7 @@ export default function ExternalLink({ className }: Props) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={`text-zinc-900 dark:text-zinc-200 ${className}`}
+      className={`w-4 h-4 my-auto text-zinc-900 dark:text-zinc-200 ${className}`}
       aria-hidden="true"
     >
       <path
