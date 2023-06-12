@@ -112,6 +112,7 @@ export default function Home() {
                     <p
                       className="cursor-pointer	flex font-semibold hover:underline"
                       onClick={openModal}
+                      onKeyUp={(e) => e.key === 'Enter' && openModal()}
                       tabIndex={1}
                     >
                       {linkCard.title}
