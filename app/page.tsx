@@ -73,7 +73,7 @@ export default function Home() {
     },
   ];
   return (
-    <main className="mx-auto mt-6 mb-12 w-10/12 sm:w-5/6 lg:w-3/4 xl:w-1/2">
+    <main className="flex-grow mx-auto mt-6 mb-12 w-10/12 sm:w-5/6 lg:w-3/4 xl:w-1/2">
       <Modal
         isOpen={modalIsOpen}
         title="Which map app do you use?"
@@ -112,6 +112,7 @@ export default function Home() {
                     <p
                       className="cursor-pointer	flex font-semibold hover:underline"
                       onClick={openModal}
+                      tabIndex={1}
                     >
                       {linkCard.title}
                       <ExternalLink className={"ml-1"} />
