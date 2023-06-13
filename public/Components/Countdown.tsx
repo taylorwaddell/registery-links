@@ -1,6 +1,5 @@
 "use client";
 
-// Countdown.tsx
 import { useEffect, useState } from "react";
 
 interface CountdownProps {
@@ -12,15 +11,13 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     const difference = +new Date(targetDate) - +new Date();
 
     let timeLeft = {
-      weeks: 0,
       days: 0,
       hours: 0,
     };
 
     if (difference > 0) {
       timeLeft = {
-        weeks: Math.floor(difference / (1000 * 60 * 60 * 24 * 7)),
-        days: Math.floor((difference / (1000 * 60 * 60 * 24)) % 7),
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
       };
     }
@@ -40,7 +37,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
 
   return (
     <p>
-      {timeLeft.weeks} Weeks {timeLeft.hours} Hours {timeLeft.days} Days
+      {timeLeft.days > 0 ? `${timeLeft.days} days` : `${timeLeft.hours} hours`}
     </p>
   );
 };
