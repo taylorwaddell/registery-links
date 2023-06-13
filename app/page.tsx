@@ -25,7 +25,7 @@ export default function Home() {
     {
       id: 0,
       column: 1,
-      link: "https://www.google.com/maps/dir//Shaw+Center+for+the+Arts,+100+Lafayette+St,+Baton+Rouge,+LA+70801/@30.4479022,-91.1915779,17z/data=!3m1!5s0x8626a0c14b427007:0x2626a4a9e03c0a6!4m9!4m8!1m0!1m5!1m1!1s0x8626a0c6b6401ad5:0x14a34040c17b1959!2m2!1d-91.189003!2d30.4478976!3e0?entry=ttu",
+      link: "https://www.google.com/maps/dir//Shaw+Center+for+the+Arts,+100+Lafayette+St,+Baton+Rouge,+LA+70801/@30.4479022,-91.1915779,17z/data=!3m1!5s0x8626a0c14b427007:0x2626a4a9e03c0a6!4m8!4m7!1m0!1m5!1m1!1s0x8626a0c6b6401ad5:0x14a34040c17b1959!2m2!1d-91.189003!2d30.4478976?entry=ttu",
       title: "Directions to Reception",
       summary: "Remember your dance shoes.",
     },
@@ -80,7 +80,7 @@ export default function Home() {
         content="Choose wisely..."
         cancelText=" Apple Maps"
         confirmText="Google Maps"
-        googleLink="https://www.google.com/maps/dir//Shaw+Center+for+the+Arts,+100+Lafayette+St,+Baton+Rouge,+LA+70801/@30.4479022,-91.1915779,17z/data=!3m1!5s0x8626a0c14b427007:0x2626a4a9e03c0a6!4m9!4m8!1m0!1m5!1m1!1s0x8626a0c6b6401ad5:0x14a34040c17b1959!2m2!1d-91.189003!2d30.4478976!3e0?entry=ttu"
+        googleLink="https://www.google.com/maps/dir//Shaw+Center+for+the+Arts,+100+Lafayette+St,+Baton+Rouge,+LA+70801/@30.4479022,-91.1915779,17z/data=!3m1!5s0x8626a0c14b427007:0x2626a4a9e03c0a6!4m8!4m7!1m0!1m5!1m1!1s0x8626a0c6b6401ad5:0x14a34040c17b1959!2m2!1d-91.189003!2d30.4478976?entry=ttu"
         appleLink="https://maps.apple.com/?daddr=Shaw%20Center%20for%20the%20Arts,%20100%20Lafayette%20St,%20Baton%20Rouge,%20LA%20%2070801,%20United%20States&dirflg=d&saddr=1758%20Brocade%20Dr,%201758%20Brocade%20Dr,%20Baton%20Rouge,%20LA%20%2070815,%20United%20States"
         close={closeModal}
       />
