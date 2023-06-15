@@ -19,6 +19,12 @@ export default function Home({ params }: { params: { alias: string } }) {
   const [weddingInfo, setWeddingInfo] = useState<WeddingInfo>();
   const supabase = createClientComponentClient<Database>();
 
+  const loadingSpinner = () => (
+    <div className="flex w-full justify-center">
+      <Spinner />
+    </div>
+  );
+
   useEffect(() => {
     const getData = async () => {
       const { data: weddingInfoResponse } = await supabase
@@ -157,15 +163,11 @@ export default function Home({ params }: { params: { alias: string } }) {
               </div>
             </div>
           ) : (
-            <div className="flex w-full justify-center">
-              <Spinner />
-            </div>
+            loadingSpinner()
           )}
         </>
       ) : (
-        <div className="flex w-full justify-center">
-          <Spinner />
-        </div>
+        loadingSpinner()
       )}
     </main>
   );
