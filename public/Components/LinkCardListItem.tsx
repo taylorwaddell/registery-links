@@ -4,16 +4,16 @@ import ExternalLink from "../icons/ExternalLink";
 import Link from "next/link";
 
 interface Props {
-  link: string;
-  title: string;
-  summary: string;
+  link: string | null;
+  title: string | null;
+  summary: string | null;
 }
 
 export default function LinkCardListItem({ title, link, summary }: Props) {
   return (
     <li className="p-2">
       <Link
-        href={link}
+        href={link ? link : '#'}
         className="flex font-semibold hover:underline"
         target="_blank"
       >
