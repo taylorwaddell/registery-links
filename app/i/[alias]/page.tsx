@@ -9,6 +9,7 @@ import LinkCardListItem from "@/public/Components/LinkCardListItem";
 import Modal from "@/public/Components/Modal";
 import Spinner from "@/public/icons/Spinner";
 import StringToParagraphs from "@/public/Utilities/StringToParagraphs";
+import WeddingNotFound from "./WeddingNotFound";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 type LinkCard = Database["public"]["Tables"]["LinkCards"]["Row"];
@@ -17,6 +18,9 @@ type WeddingInfo = Database["public"]["Tables"]["WeddingInfo"]["Row"];
 export default function Home({ params }: { params: { alias: string } }) {
   const [linkCards, setLinkCards] = useState<LinkCard[] | null>(null);
   const [weddingInfo, setWeddingInfo] = useState<WeddingInfo>();
+  const [weddingNotFound, setWeddingNotFound] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const supabase = createClientComponentClient<Database>();
 
   const loadingSpinner = () => (
@@ -26,6 +30,7 @@ export default function Home({ params }: { params: { alias: string } }) {
   );
 
   useEffect(() => {
+    setLoading(true);
     const getData = async () => {
       const { data: weddingInfoResponse } = await supabase
         .from("WeddingInfo")
@@ -36,7 +41,9 @@ export default function Home({ params }: { params: { alias: string } }) {
         .single();
 
       if (!weddingInfoResponse) {
-        throw new Error("That wedding is not found.");
+        setWeddingNotFound(true);
+        setLoading(false);
+        return;
       }
 
       setWeddingInfo(weddingInfoResponse);
@@ -48,12 +55,12 @@ export default function Home({ params }: { params: { alias: string } }) {
         .is("deleted", false);
 
       setLinkCards(cards);
+      setLoading(false);
     };
 
     getData();
   }, [supabase, params.alias]);
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   function closeModal() {
     setModalIsOpen(false);
   }
@@ -62,7 +69,7 @@ export default function Home({ params }: { params: { alias: string } }) {
   }
   return (
     <main className="flex-grow mx-auto mt-6 mb-12 w-10/12 sm:w-5/6 lg:w-3/4 xl:w-1/2">
-      {weddingInfo ? (
+      {!loading && weddingInfo && (
         <>
           {weddingInfo.addressOne && (
             <Modal
@@ -166,9 +173,9 @@ export default function Home({ params }: { params: { alias: string } }) {
             loadingSpinner()
           )}
         </>
-      ) : (
-        loadingSpinner()
       )}
+      {loading && loadingSpinner()}
+      {weddingNotFound && !loading && WeddingNotFound()}
     </main>
   );
 }
