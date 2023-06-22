@@ -1,152 +1,50 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import AddressToDirectionsLink from "@/public/Utilities/AddressToDirectionsLink";
-import type { Database } from "@/types/supabase";
-import ExternalLink from "@/public/icons/ExternalLink";
-import LinkCardListItem from "@/public/Components/LinkCardListItem";
-import Modal from "@/public/Components/Modal";
-import Spinner from "@/public/icons/Spinner";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-
-type LinkCard = Database["public"]["Tables"]["LinkCards"]["Row"];
+import Countdown from "@/public/Components/Countdown";
+import { FormEvent } from "react";
+import Link from "next/link";
 
 export default function Home() {
-  const [linkCards, setLinkCards] = useState<LinkCard[] | null>(null);
-  const supabase = createClientComponentClient<Database>();
-
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await supabase
-        .from("LinkCards")
-        .select()
-        .is("deleted", false);
-      console.log(data);
-      setLinkCards(data);
-    };
-
-    getData();
-  }, [supabase]);
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  function closeModal() {
-    setModalIsOpen(false);
+  function getThing(e: FormEvent): void {
+    e.preventDefault();
+    return;
   }
-  function openModal() {
-    setModalIsOpen(true);
-  }
+
   return (
-    <main className="flex-grow mx-auto mt-6 mb-12 w-10/12 sm:w-5/6 lg:w-3/4 xl:w-1/2">
-      <Modal
-        isOpen={modalIsOpen}
-        title="Which map app do you use?"
-        content="Choose wisely..."
-        cancelText=" Apple Maps"
-        confirmText="Google Maps"
-        googleLink={
-          AddressToDirectionsLink("100 lafayette st baton rouge la 70801")
-            .google
-        }
-        appleLink={
-          AddressToDirectionsLink("100 lafayette st baton rouge la 70801").apple
-        }
-        close={closeModal}
-      />
-      <h1 className="w-full text-center text-2xl">T A L Y</h1>
-      <div className="py-8 px-6 border-2 border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm my-10">
-        <p className="mb-5">
-          Welcome to our wedding information website, where love and celebration
-          come together! We are thrilled to have you join us on this joyous
-          occasion and extend our warmest welcome to all our guests.
-        </p>
+    <>
+      <main className="flex-grow mx-auto mt-6 mb-12 w-10/12 sm:w-5/6 lg:w-3/4 xl:w-1/2">
+        Welcome to Wedding Info!
+        <form
+          className="flex gap-1"
+          action="submit"
+          method="get"
+          onSubmit={(e) => getThing(e)}
+        >
+          <input
+            className="rounded-md border shadow-sm px-4 py-1 dark:text-zinc-900 text-zinc-200 bg-zinc-700 dark:bg-zinc-200 sm:mt-0 sm:w-auto sm:text-sm"
+            type="text"
+            placeholder="Search for a wedding..."
+          />
+          <button
+            className="rounded-md border shadow-sm px-4 py-1 dark:text-zinc-900 text-zinc-200 hover:text-zinc-200 bg-zinc-700 dark:bg-zinc-200 hover:bg-zinc-800 sm:mt-0 sm:w-auto sm:text-sm"
+            type="submit"
+          >
+            Search
+          </button>
+        </form>
+      </main>
+      <footer className="flex justify-center border-t border-zinc-700 w-full text-center p-4 text-zinc-500 dark:text-zinc-500 text-sm md:text-base">
         <p>
-          Here, you will find a treasure trove of details about our upcoming
-          wedding, ensuring that you have all the information you need to fully
-          enjoy and participate in this memorable event.
+          made with ♥ by{" "}
+          <Link
+            className="hover:underline"
+            href="https://twadd.dev"
+            target="_blank"
+          >
+            twadd
+          </Link>
         </p>
-      </div>
-
-      {linkCards ? (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-10">
-          <div className="space-y-2">
-            <h2 className="font-light text-lg pl-2 text-zinc-600 dark:text-zinc-500">
-              Wedding Info
-            </h2>
-            <ul className="space-y-2">
-              {linkCards.map((linkCard) => {
-                if (linkCard.column !== 1) return;
-                if (linkCard.isNavCard) {
-                  return (
-                    <li className="p-2" key={linkCard.id}>
-                      <p
-                        className="cursor-pointer	flex font-semibold hover:underline"
-                        onClick={openModal}
-                        onKeyUp={(e) => e.key === "Enter" && openModal()}
-                        tabIndex={1}
-                      >
-                        {linkCard.title}
-                        <ExternalLink className={"ml-1"} />
-                      </p>
-                      <p className="text-sm text-zinc-500 dark:text-zinc-500">
-                        {linkCard.summary}
-                      </p>
-                    </li>
-                  );
-                }
-                return (
-                  <LinkCardListItem
-                    key={linkCard.id}
-                    title={linkCard.title}
-                    link={linkCard.link}
-                    summary={linkCard.summary}
-                  />
-                );
-              })}
-            </ul>
-          </div>
-          <div className="space-y-2">
-            <h2 className="font-light text-lg pl-2 text-zinc-600 dark:text-zinc-500">
-              Registries
-            </h2>
-            <ul className="space-y-2">
-              {linkCards.map((linkCard) => {
-                if (linkCard.column !== 2) return;
-                return (
-                  <LinkCardListItem
-                    key={linkCard.id}
-                    title={linkCard.title}
-                    link={linkCard.link}
-                    summary={linkCard.summary}
-                  />
-                );
-              })}
-            </ul>
-          </div>
-          <div className="space-y-2">
-            <h2 className="font-light text-lg pl-2 text-zinc-600 dark:text-zinc-500">
-              Misc
-            </h2>
-            <ul className="space-y-2">
-              {linkCards.map((linkCard) => {
-                if (linkCard.column !== 3) return;
-                return (
-                  <LinkCardListItem
-                    key={linkCard.id}
-                    title={linkCard.title}
-                    link={linkCard.link}
-                    summary={linkCard.summary}
-                  />
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-      ) : (
-        <div className="flex w-full justify-center">
-          <Spinner />
-        </div>
-      )}
-    </main>
+      </footer>
+    </>
   );
 }

@@ -22,20 +22,6 @@ export default function RootLayout({
         className={`min-h-screen flex flex-col ${inter.className} bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-200`}
       >
         {children}
-        <footer className="flex justify-center border-t border-zinc-700 w-full text-center p-4 text-zinc-500 dark:text-zinc-500 text-sm md:text-base">
-          <p>
-            made with ♥ by{" "}
-            <Link
-              className="hover:underline"
-              href="https://twadd.dev"
-              target="_blank"
-            >
-              twadd
-            </Link>
-          </p>
-          <span className="px-5">|</span>
-          <Countdown targetDate="2023-11-10" />
-        </footer>
       </body>
     </html>
   );
