@@ -53,7 +53,7 @@ export default function Home({ params }: { params: { alias: string } }) {
       const { data: cards } = await supabase
         .from("LinkCards")
         .select()
-        .eq("weddingFK", weddingInfoResponse.id)
+        .eq("wedding_fk", weddingInfoResponse.id)
         .is("deleted", false);
 
       setLinkCards(cards);

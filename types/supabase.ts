@@ -11,6 +11,7 @@ export interface Database {
     Tables: {
       LinkCards: {
         Row: {
+          admin_id: string
           column: number | null
           created_at: string | null
           deleted: boolean | null
@@ -19,9 +20,10 @@ export interface Database {
           link: string | null
           summary: string | null
           title: string | null
-          weddingFK: number
+          wedding_fk: number
         }
         Insert: {
+          admin_id: string
           column?: number | null
           created_at?: string | null
           deleted?: boolean | null
@@ -30,9 +32,10 @@ export interface Database {
           link?: string | null
           summary?: string | null
           title?: string | null
-          weddingFK: number
+          wedding_fk: number
         }
         Update: {
+          admin_id?: string
           column?: number | null
           created_at?: string | null
           deleted?: boolean | null
@@ -41,12 +44,18 @@ export interface Database {
           link?: string | null
           summary?: string | null
           title?: string | null
-          weddingFK?: number
+          wedding_fk?: number
         }
         Relationships: [
           {
-            foreignKeyName: "LinkCards_weddingFK_fkey"
-            columns: ["weddingFK"]
+            foreignKeyName: "LinkCards_admin_id_fkey"
+            columns: ["admin_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "LinkCards_wedding_fk_fkey"
+            columns: ["wedding_fk"]
             referencedRelation: "WeddingInfo"
             referencedColumns: ["id"]
           }
@@ -58,6 +67,7 @@ export interface Database {
           addressOne: string | null
           addressThree: string | null
           addressTwo: string | null
+          admin_id: string
           alias: string
           created_at: string | null
           date: string | null
@@ -71,6 +81,7 @@ export interface Database {
           addressOne?: string | null
           addressThree?: string | null
           addressTwo?: string | null
+          admin_id: string
           alias?: string
           created_at?: string | null
           date?: string | null
@@ -84,6 +95,7 @@ export interface Database {
           addressOne?: string | null
           addressThree?: string | null
           addressTwo?: string | null
+          admin_id?: string
           alias?: string
           created_at?: string | null
           date?: string | null
@@ -92,7 +104,14 @@ export interface Database {
           id?: number
           title?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "WeddingInfo_admin_id_fkey"
+            columns: ["admin_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {

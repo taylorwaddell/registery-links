@@ -2,7 +2,7 @@ import "./globals.css";
 
 import Countdown from "@/public/Components/Countdown";
 import { Inter } from "next/font/google";
-import Link from "next/link";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
