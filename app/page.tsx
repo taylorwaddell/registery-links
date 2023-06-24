@@ -15,7 +15,6 @@ export default function Home() {
             <Link
               className="flex font-semibold underline hover:underline-offset-2"
               href="#"
-              target="_blank"
             >
               Sign Up
             </Link>
@@ -23,7 +22,6 @@ export default function Home() {
             <Link
               className="flex font-semibold underline hover:underline-offset-2"
               href="/login"
-              target="_blank"
             >
               Sign In
             </Link>
