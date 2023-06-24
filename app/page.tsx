@@ -1,7 +1,6 @@
 "use client";
 
 import ExternalLink from "@/public/icons/ExternalLink";
-import { FormEvent } from "react";
 import Link from "next/link";
 
 export default function Home() {
