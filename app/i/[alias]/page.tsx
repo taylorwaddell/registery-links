@@ -10,6 +10,7 @@ import Link from "next/link";
 import LinkCardListItem from "@/public/Components/LinkCardListItem";
 import Modal from "@/public/Components/Modal";
 import Spinner from "@/public/icons/Spinner";
+import { StandardClasses } from "@/public/Utilities/Classes.enum";
 import StringToParagraphs from "@/public/Utilities/StringToParagraphs";
 import WeddingNotFound from "./WeddingNotFound";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -112,7 +113,12 @@ export default function Home({ params }: { params: { alias: string } }) {
                         return (
                           <li className="p-2" key={linkCard.id}>
                             <p
-                              className="cursor-pointer	flex font-semibold hover:underline"
+                              className={
+                                StandardClasses.link +
+                                (linkCard.isDisabled
+                                  ? StandardClasses.linkDisabled
+                                  : "")
+                              }
                               onClick={openModal}
                               onKeyUp={(e) => e.key === "Enter" && openModal()}
                               tabIndex={1}
@@ -132,6 +138,7 @@ export default function Home({ params }: { params: { alias: string } }) {
                           title={linkCard.title}
                           link={linkCard.link}
                           summary={linkCard.summary}
+                          disabled={linkCard.isDisabled}
                         />
                       );
                     })}
@@ -150,6 +157,7 @@ export default function Home({ params }: { params: { alias: string } }) {
                           title={linkCard.title}
                           link={linkCard.link}
                           summary={linkCard.summary}
+                          disabled={linkCard.isDisabled}
                         />
                       );
                     })}
@@ -168,6 +176,7 @@ export default function Home({ params }: { params: { alias: string } }) {
                           title={linkCard.title}
                           link={linkCard.link}
                           summary={linkCard.summary}
+                          disabled={linkCard.isDisabled}
                         />
                       );
                     })}

@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
@@ -16,6 +16,7 @@ export interface Database {
           created_at: string | null
           deleted: boolean | null
           id: number
+          isDisabled: boolean
           isNavCard: boolean | null
           link: string | null
           summary: string | null
@@ -28,6 +29,7 @@ export interface Database {
           created_at?: string | null
           deleted?: boolean | null
           id?: number
+          isDisabled?: boolean
           isNavCard?: boolean | null
           link?: string | null
           summary?: string | null
@@ -40,6 +42,7 @@ export interface Database {
           created_at?: string | null
           deleted?: boolean | null
           id?: number
+          isDisabled?: boolean
           isNavCard?: boolean | null
           link?: string | null
           summary?: string | null
