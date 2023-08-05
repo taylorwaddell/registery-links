@@ -1,6 +1,7 @@
 "use client";
 
 import type { Database } from "@/types/supabase";
+import { StandardClasses } from "@/public/Utilities/Classes.enum";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -39,43 +40,54 @@ export default function Login() {
     <div className="w-full flex justify-center my-5">
       <div className="w-25">
         <div className="flex justify-between mb-4">
-          <label htmlFor="email">email</label>
-          <input
-            name="email"
-            className="rounded py-1 px-2 text-zinc-900"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </div>
-        <div className="flex justify-between mb-4">
-          <label htmlFor="password">password</label>
-          <input
-            type="password"
-            name="password"
-            className="rounded py-1 px-2 text-zinc-900"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-        </div>
-        <div className="flex gap-4">
-          <button
-            className="rounded-md border shadow-sm px-4 py-2 dark:text-zinc-900 text-zinc-200 hover:text-zinc-200 bg-zinc-700 dark:bg-zinc-200 hover:bg-zinc-800 sm:mt-0 sm:w-auto sm:text-sm"
-            onClick={handleSignUp}
-          >
-            Sign up
-          </button>
-          <button
-            className="rounded-md border shadow-sm px-4 py-2 dark:text-zinc-900 text-zinc-200 hover:text-zinc-200 bg-zinc-700 dark:bg-zinc-200 hover:bg-zinc-800 sm:mt-0 sm:w-auto sm:text-sm"
-            onClick={handleSignIn}
-          >
-            Sign in
-          </button>
-          <button
-            className="rounded-md border shadow-sm px-4 py-2 dark:text-zinc-900 text-zinc-200 hover:text-zinc-200 bg-zinc-700 dark:bg-zinc-200 hover:bg-zinc-800 sm:mt-0 sm:w-auto sm:text-sm"
-            onClick={handleSignOut}
-          >
-            Sign out
-          </button>
+          <form>
+            <div className="flex justify-between mb-4">
+              <label htmlFor="email" className="sr-only">
+                email
+              </label>
+              <input
+                name="email"
+                type="email"
+                placeholder="email"
+                className={StandardClasses.inputPrimary}
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+            </div>
+            <div className="flex justify-between mb-4">
+              <label htmlFor="password" className="sr-only">
+                password
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="password"
+                className={StandardClasses.inputPrimary}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+            </div>
+            <div className="flex gap-4">
+              <button
+                className={StandardClasses.buttonPrimary}
+                onClick={handleSignUp}
+              >
+                Sign up
+              </button>
+              <button
+                className={StandardClasses.buttonPrimary}
+                onClick={handleSignIn}
+              >
+                Sign in
+              </button>
+              <button
+                className={StandardClasses.buttonPrimary}
+                onClick={handleSignOut}
+              >
+                Sign out
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

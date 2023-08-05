@@ -169,7 +169,18 @@ export default function Home({ params }: { params: { alias: string } }) {
     <>
       <Toaster />
       <main className="flex-grow mx-auto mt-6 mb-12 w-10/12 sm:w-5/6 lg:w-3/4 xl:w-1/2">
-        {!loading && noUser && <p>Please login to edit.</p>}
+        {!loading && noUser && (
+          <p className="flex">
+            Please
+            <Link
+              href="/login"
+              className="flex mx-1 font-semibold underline hover:underline-offset-2"
+            >
+              login
+            </Link>
+            to edit.
+          </p>
+        )}
         {!loading && !noUser && !hasPermission && (
           <p>You can only edit your own wedding.</p>
         )}
