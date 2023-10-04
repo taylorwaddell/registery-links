@@ -8,7 +8,9 @@ interface CountdownProps {
 
 const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   const calculateTimeLeft = () => {
-    const difference = +new Date(targetDate) - +new Date();
+    const targetJsDate = new Date(`${targetDate}T00:00:00`);
+    const now = new Date();
+    const difference = targetJsDate.getTime() - now.getTime();
 
     let timeLeft = {
       days: 0,
@@ -17,7 +19,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
 
     if (difference > 0) {
       timeLeft = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        days: Math.ceil(difference / (1000 * 60 * 60 * 24)), // Used Math.ceil here
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
       };
     }
@@ -28,11 +30,11 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(timer);
   });
 
   return (
